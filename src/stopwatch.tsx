@@ -32,16 +32,13 @@ export default function StopwatchCommand() {
                 ? Color.Orange
                 : Color.SecondaryText,
           }}
-          accessories={[
-            ...(isRunning
-              ? [
-                  { tag: { value: "⏎ Lap", color: Color.SecondaryText } },
-                  { tag: { value: "Running", color: Color.Green } },
-                ]
+          accessories={
+            isRunning
+              ? [{ tag: { value: "Running", color: Color.Green } }]
               : hasStarted
                 ? [{ tag: { value: "Paused", color: Color.Orange } }]
-                : []),
-          ]}
+                : []
+          }
           actions={
             <ActionPanel>
               {!isRunning ? (
@@ -51,15 +48,15 @@ export default function StopwatchCommand() {
                   onAction={start}
                 />
               ) : (
-                <>
-                  <Action title="Lap" icon={Icon.Plus} onAction={lap} />
-                  <Action
-                    title="Pause"
-                    icon={Icon.Pause}
-                    shortcut={{ modifiers: ["cmd"], key: "p" }}
-                    onAction={pause}
-                  />
-                </>
+                <Action title="Pause" icon={Icon.Pause} onAction={pause} />
+              )}
+              {isRunning && (
+                <Action
+                  title="Lap"
+                  icon={Icon.Plus}
+                  shortcut={{ modifiers: ["cmd"], key: "l" }}
+                  onAction={lap}
+                />
               )}
               {hasStarted && (
                 <Action
