@@ -9,9 +9,14 @@
     {
       "name": "stopwatch",
       "title": "Stopwatch",
-      "description": "A Stopwatch for Raycast",
-      "mode": "no-view",
-      "subtitle": ""
+      "description": "Full stopwatch with laps and live time display",
+      "mode": "view"
+    },
+    {
+      "name": "start-stopwatch",
+      "title": "Start Stopwatch",
+      "description": "Quick start or pause the stopwatch",
+      "mode": "no-view"
     }
   ],
   "dependencies": {
