@@ -1,3 +1,4 @@
+import { showToast, Toast } from "@raycast/api";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Timer } from "./types";
 import { getTimers, setTimers } from "./storage";
@@ -75,9 +76,11 @@ export function useTimers(): UseTimersReturn {
         // Check for newly completed timers
         setTimersState((prev) => {
           let changed = false;
+          const justCompleted: string[] = [];
           const updated = prev.map((t) => {
             if (t.isRunning && !t.isCompleted && getRemaining(t) <= 0) {
               changed = true;
+              justCompleted.push(t.name);
               return {
                 ...t,
                 isRunning: false,
@@ -89,6 +92,13 @@ export function useTimers(): UseTimersReturn {
           });
           if (changed) {
             setTimers(updated); // fire-and-forget persist
+            for (const name of justCompleted) {
+              showToast({
+                style: Toast.Style.Success,
+                title: "Timer Finished",
+                message: name,
+              });
+            }
           }
           return changed ? updated : prev;
         });
