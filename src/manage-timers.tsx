@@ -12,7 +12,6 @@ export default function ManageTimersCommand() {
     restartTimer,
     clearCompleted,
     getRemaining,
-    tick,
   } = useTimers();
 
   const activeTimers = timers.filter((t) => !t.isCompleted);

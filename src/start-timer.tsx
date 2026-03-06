@@ -153,7 +153,7 @@ export default function StartTimerCommand() {
                     onAction={() =>
                       push(
                         <TimerForm
-                          onSubmit={async (name, _) => {
+                          onSubmit={async (name) => {
                             await handleStartTimer(name, recent.durationMs);
                           }}
                         />,

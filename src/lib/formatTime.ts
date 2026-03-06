@@ -114,7 +114,6 @@ export function getUtcOffset(date: Date, timezone: string): string {
  * @returns A string like "+3h", "-5.5h", or "same time"
  */
 export function getTimeDifference(date: Date, timezone: string): string {
-  const localOffset = date.getTimezoneOffset(); // minutes, inverted sign
   const targetDate = new Date(
     date.toLocaleString("en-US", { timeZone: timezone }),
   );
