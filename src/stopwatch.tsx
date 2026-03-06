@@ -32,13 +32,16 @@ export default function StopwatchCommand() {
                 ? Color.Orange
                 : Color.SecondaryText,
           }}
-          accessories={
-            isRunning
-              ? [{ tag: { value: "Running", color: Color.Green } }]
+          accessories={[
+            ...(isRunning
+              ? [
+                  { tag: { value: "⌘L Lap", color: Color.SecondaryText } },
+                  { tag: { value: "Running", color: Color.Green } },
+                ]
               : hasStarted
                 ? [{ tag: { value: "Paused", color: Color.Orange } }]
-                : []
-          }
+                : []),
+          ]}
           actions={
             <ActionPanel>
               {!isRunning ? (
