@@ -13,12 +13,6 @@
       "mode": "view"
     },
     {
-      "name": "start-stopwatch",
-      "title": "Start Stopwatch",
-      "description": "Quick start or pause the stopwatch",
-      "mode": "no-view"
-    },
-    {
       "name": "start-timer",
       "title": "Start Timer",
       "description": "Set a countdown timer with custom duration",
