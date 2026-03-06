@@ -80,8 +80,9 @@ export const SOUND_PRESETS: Record<string, Note[]> = {
 };
 
 function generateWav(notes: Note[]): Buffer {
-  const totalDuration = notes.reduce((sum, n) => sum + n.dur, 0);
-  const numSamples = Math.floor(SAMPLE_RATE * totalDuration);
+  // Calculate total samples from individual notes to avoid floating point mismatch
+  const sampleCounts = notes.map((n) => Math.floor(SAMPLE_RATE * n.dur));
+  const numSamples = sampleCounts.reduce((sum, s) => sum + s, 0);
   const dataSize = numSamples * 2; // 16-bit mono
 
   const buf = Buffer.alloc(44 + dataSize);
@@ -108,8 +109,9 @@ function generateWav(notes: Note[]): Buffer {
   // Generate PCM samples with sine waves + envelopes
   let offset = 44;
 
-  for (const note of notes) {
-    const noteSamples = Math.floor(SAMPLE_RATE * note.dur);
+  for (let ni = 0; ni < notes.length; ni++) {
+    const note = notes[ni];
+    const noteSamples = sampleCounts[ni];
     const vol = note.vol ?? 0.35;
     const releaseRatio = note.release ?? 0.3;
 
